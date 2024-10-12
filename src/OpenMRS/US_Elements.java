@@ -73,6 +73,72 @@ public class US_Elements {
       @FindBy(css = "[role='alert']>tr")
       public List<WebElement> rowcounts;
 
+      @FindBy(xpath = "//*[@id=\"sessionLocation\"]")
+      public List<WebElement> productListChooseLocation;
+
+      @FindBy(id = "username")
+      public WebElement userName;
+
+      @FindBy(id = "loginButton")
+      public WebElement lgnBttn;
+
+      @FindBy(linkText = "Register a patient")
+      public WebElement registerBttn;
+
+      @FindBy(name = "givenName")
+      public WebElement givenName;
+
+      @FindBy(name = "familyName")
+      public WebElement familyName;
+
+      @FindBy(id = "next-button")
+      public WebElement nextBttn;
+
+      @FindBy(xpath = "//option[@value=\"F\"]")
+      public WebElement genderChoosing;
+
+      @FindBy(id= "birthdateDay-field")
+      public WebElement birthDay;
+
+      @FindBy(id= "birthdateMonth-field")
+      public WebElement webMonths;
+
+      @FindBy(name= "birthdateYear")
+      public WebElement birthYear;
+
+      @FindBy(id= "address1")
+      public WebElement adress1 ;
+
+      @FindBy(name= "phoneNumber")
+      public WebElement phoneNumber ;
+
+      @FindBy(id= "relationship_type")
+      public WebElement webRelations ;
+
+      @FindBy(xpath= "//*[@id=\\\"relationship\\\"]/p[2]/input[1]")
+      public WebElement personName;
+
+      @FindBy(id= "submit")
+      public WebElement submit;
+
+      @FindBy(xpath= "//*[@id=\"content\"]/div[6]/div[1]/div/div[1]/h1/span[1]/span")
+      public WebElement nameOnPage;
+
+      @FindBy(xpath= "//*[@id=\"content\"]/div[6]/div[2]/div")
+      public WebElement idOnPage;
+
+      @FindBy(xpath= "//*[@id=\"Pharmacy\"]")
+      public WebElement location;
+
+      @FindBy(xpath= "//*[@id=\"coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension\"]")
+      public WebElement recordPatient;
+
+      @FindBy(xpath= "//input[@id=\"patient-search\"]")
+      public WebElement searchPatient;
+
+      @FindBy(xpath= "//*[@id=\"patient-search-results-table\"]/tbody")
+      public WebElement findRecord;
+
 
 
 
