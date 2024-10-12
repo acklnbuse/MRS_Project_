@@ -4,11 +4,16 @@ import Utility.BaseDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
+import java.time.Duration;
 import java.util.List;
 
 public class US_Elements {
 
+      public WebDriverWait wait=new WebDriverWait(BaseDriver.driver, Duration.ofSeconds(5));
       public US_Elements() {
             PageFactory.initElements(BaseDriver.driver, this);
       }
@@ -138,6 +143,92 @@ public class US_Elements {
 
       @FindBy(xpath= "//*[@id=\"patient-search-results-table\"]/tbody")
       public WebElement findRecord;
+
+
+
+      @FindBy(css = "[class='gt_float_switcher-arrow']")
+      public WebElement languageClick;
+      @FindBy(css = "[data-gt-lang='en']")
+      public WebElement languageSelection;
+
+      @FindBy(css = "[class='zak-button']")
+      public WebElement demoClick;
+
+      @FindBy(linkText = "Explore OpenMRS 2")
+      public WebElement exploreOpenMRS2Click;
+
+      @FindBy(linkText = "Enter the OpenMRS 2 Demo")
+      public WebElement enterOpenMRS2Demo;
+
+
+      @FindBy(id = "Inpatient Ward")
+      public WebElement locationInpatientWard;
+
+      @FindBy(id = "selected-location")
+      public WebElement locationText;
+
+      @FindBy(css = "[class='icon-signout small']")
+      public WebElement logout;
+
+      @FindBy(css = "[class='w-auto']")
+      public WebElement loginText;
+
+      @FindBy(css = "[class='nav-item identifier']")
+      public WebElement adminIcon;
+
+      @FindBy(xpath = "(//li/a)[1]")
+      public WebElement myAccountClick;
+
+      @FindBy(xpath = "(//div[@class='task'])[1]")
+      public WebElement changePassword;
+
+      @FindBy(xpath = "(//div[@class='task'])[2]")
+      public WebElement myLanguages;
+
+      @FindBy(css = "[class='icon-search']")
+      public WebElement findPalientRecord;
+
+      @FindBy(css = "[class='icon-hdd']")
+      public WebElement dataManagement;
+
+      @FindBy(css = "[class='icon-group']")
+      public WebElement mergePatientElectronicRecords;
+
+      @FindBy(css = "[id='patient1-text']")
+      public WebElement PatientID1;
+
+      @FindBy(css = "[id='patient2-text']")
+      public WebElement PatientID2;
+
+      @FindBy(css = "[id='confirm-button']")
+      public WebElement continueBtn;
+
+      @FindBy(xpath = "(//div[@class='row name'])[2]")
+      public WebElement selectThePreferredRecord;
+
+      @FindBy(xpath = "//div//h1")
+      public WebElement mergingMassage;
+
+      @FindBy(css = "[class='float-sm-right'] :nth-child(2)")
+      public WebElement patientID1Text;
+
+      @FindBy(css = "[class='float-sm-right'] :nth-child(3)")
+      public WebElement patientID2Text;
+
+
+
+
+
+      public void verifyContainsText(WebElement element, String value){
+
+
+            wait.until(ExpectedConditions.textToBePresentInElement(element,value));
+
+            Assert.assertTrue(element.getText().toLowerCase().contains(value.toLowerCase()));
+
+
+      }
+
 
 
 
