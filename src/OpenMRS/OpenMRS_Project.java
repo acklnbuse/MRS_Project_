@@ -42,6 +42,34 @@ public class OpenMRS_Project extends BaseDriver {
 
     }
 
+    @Test ( priority = 2)
+    public void Login() {
+        driver.get("https://openmrs.org/");
+        Tools.Bekle(2);
+        WebElement demo1= driver.findElement(By.xpath("//a[@class='zak-button']"));
+        demo1.click();
+        Tools.Bekle(2);
+
+        WebElement demo2= driver.findElement(By.xpath("(//span[@class='elementor-button-text'])[2]"));
+        demo2.click();
+
+        WebElement demo3= wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//span[@class='elementor-button-text'])[4]")));
+        JavascriptExecutor js=(JavascriptExecutor)driver;
+        js.executeScript("arguments[0].click();", demo3);
+
+        WebElement email=driver.findElement(By.id("username"));
+        email.sendKeys("admin");
+
+        WebElement password=driver.findElement(By.id("password"));
+        password.sendKeys("Admin123");
+
+        WebElement ward=driver.findElement(By.id("Inpatient Ward"));
+        ward.click();
+
+        WebElement login=driver.findElement(By.cssSelector("input[id=\"loginButton\"]"));
+        login.click();
+    }
+
     @Test (priority = 4)//(dependsOnMethods = {US_402'da kullanilan method ismini yaz},alwaysRun = true) hatali olsada calismaya devam et
     public void RegisterPatient() {
         US_Elements locators = new US_Elements();
@@ -111,7 +139,32 @@ public class OpenMRS_Project extends BaseDriver {
                 "Metin eşleşmedi!");
     }
 
+    @Test(priority = 7)
+    public void deletePatient() {
 
+        WebElement findPatientBtn = driver.findElement(By.id("coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension"));
+        findPatientBtn.click();
+
+        WebElement searchBox = driver.findElement(By.id("patient-search"));
+        searchBox.sendKeys("Tri A A");
+
+        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("(//tr[@class='odd'])[1]")));
+        WebElement chosee = driver.findElement(By.xpath("(//tr[@class='odd'])[1]"));
+
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();",chosee);
+
+        WebElement deletePatientLink = wait.until(ExpectedConditions.elementToBeClickable(By.linkText("Delete Patient")));
+        deletePatientLink.click();
+
+        WebElement reasonInput = driver.findElement(By.id("delete-reason"));
+        reasonInput.sendKeys("keyfi");
+        WebElement confirmDeleteBtn = driver.findElement(By.xpath("//button[text()='Confirm']"));
+        confirmDeleteBtn.click();
+
+        WebElement successMessage = driver.findElement(By.xpath("//div[contains(text(), 'Patient has been deleted')]"));
+        Assert.assertTrue(successMessage.isDisplayed(), "Hasta silme işlemi başarısız.");
+    }
 
 
 
