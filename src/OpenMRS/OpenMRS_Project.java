@@ -1,8 +1,8 @@
 package OpenMRS;
-
 import Utility.BaseDriver;
 import Utility.Tools;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -10,7 +10,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
 import java.util.Random;
 
 public class OpenMRS_Project extends BaseDriver {
@@ -45,10 +44,10 @@ public class OpenMRS_Project extends BaseDriver {
     @Test ( priority = 2)
     public void Login() {
         driver.get("https://openmrs.org/");
-        Tools.Bekle(2);
+        Tools.Wait(2);
         WebElement demo1= driver.findElement(By.xpath("//a[@class='zak-button']"));
         demo1.click();
-        Tools.Bekle(2);
+        Tools.Wait(2);
 
         WebElement demo2= driver.findElement(By.xpath("(//span[@class='elementor-button-text'])[2]"));
         demo2.click();
@@ -82,7 +81,6 @@ public class OpenMRS_Project extends BaseDriver {
 
         System.out.println("Seçilen Lokasyon: " + selectedLocation.getText());
         selectedLocation.click();
-
 
         locators.userName.sendKeys("admin");
         locators.password.sendKeys("Admin123");
@@ -121,8 +119,6 @@ public class OpenMRS_Project extends BaseDriver {
     @Test (priority = 6)
     public void SearchFromPatientList(){
         US_Elements locators = new US_Elements();
-
-
 
         locators.userName.sendKeys("admin");
         locators.password.sendKeys("Admin123");
@@ -202,8 +198,6 @@ public class OpenMRS_Project extends BaseDriver {
         System.out.println(locators.loginText.getText());
 
         locators.verifyContainsText(locators.loginText, "LOGIN");
-
-
 
     }
 
@@ -294,106 +288,70 @@ public class OpenMRS_Project extends BaseDriver {
         locators.verifyContainsText(locators.patientID1Text,"100J27");
         locators.verifyContainsText(locators.patientID2Text,"100H");
 
+    }
+    @Test(priority = 8)
+    public void PatientListing(){
+
+        US_Elements locators = new US_Elements();
+
+        driver.get("https://openmrs.org");
+
+        locators.languageOption.click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.choosingLanguage)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locators.demoButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locators.exOpenMRS2Button)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locators.enterExOpenMRS2Button));
+        new Actions(driver).scrollToElement(locators.enterExOpenMRS2Button).build().perform();
+        Tools.Wait(1);
+        locators.enterExOpenMRS2Button.click();
+        wait.until(ExpectedConditions.visibilityOf(locators.username)).sendKeys("admin");
+        wait.until(ExpectedConditions.visibilityOf(locators.password)).sendKeys("Admin123");
+        wait.until(ExpectedConditions.elementToBeClickable(locators.InpatientWardButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locators.loginButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locators.findPatientRecordButton)).click();
+
+        US_Elements tc=new US_Elements();
+
+        String[] totalrowinfo=tc.patientcountinfo.getText().split(" ");
+        int totalrow=Integer.parseInt(totalrowinfo[3]);
+
+        Assert.assertTrue(tc.rowcounts.size()==totalrow, "Test Failed: The number of table rows does not match the total number of entries.");
+
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Test(priority = 10)
+    public void Appointment(){
+
+        US_Elements locators = new US_Elements();
+
+        driver.get("https://openmrs.org");
+
+        locators.languageOption.click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.choosingLanguage)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locators.demoButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locators.exOpenMRS2Button)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locators.enterExOpenMRS2Button));
+        new Actions(driver).scrollToElement(locators.enterExOpenMRS2Button).build().perform();
+        Tools.Wait(1);
+        locators.enterExOpenMRS2Button.click();
+        wait.until(ExpectedConditions.visibilityOf(locators.username)).sendKeys("admin");
+        wait.until(ExpectedConditions.visibilityOf(locators.password)).sendKeys("Admin123");
+        wait.until(ExpectedConditions.elementToBeClickable(locators.InpatientWardButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locators.loginButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locators.appSchedulingButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locators.appManageButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(locators.searchBox)).sendKeys("Buse Ozer");
+        wait.until(ExpectedConditions.elementToBeClickable(locators.enterName)).click();
+        Tools.Wait(1);
+        wait.until(ExpectedConditions.visibilityOf(locators.errorMessage3));
+        Assert.assertTrue(locators.errorMessage3.getText().contains("Coordinated Universal Time"),
+                "Warning message could not be reached");
+
+
+
+    }
 
 
 
