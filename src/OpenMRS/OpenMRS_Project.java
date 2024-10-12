@@ -44,67 +44,68 @@ public class OpenMRS_Project extends BaseDriver {
 
     @Test (priority = 4)//(dependsOnMethods = {US_402'da kullanilan method ismini yaz},alwaysRun = true) hatali olsada calismaya devam et
     public void RegisterPatient() {
-        Elements element = new Elements();
+        US_Elements locators = new US_Elements();
         Random random = new Random();
 
-        int randomChoosing = random.nextInt(element.productListChooseLocation.size());
+        int randomChoosing = random.nextInt(locators.productListChooseLocation.size());
         System.out.println("Rastgele Seçim: " + randomChoosing);
 
-        WebElement selectedLocation = element.productListChooseLocation.get(randomChoosing);
+        WebElement selectedLocation = locators.productListChooseLocation.get(randomChoosing);
 
         System.out.println("Seçilen Lokasyon: " + selectedLocation.getText());
         selectedLocation.click();
 
 
-        element.userName.sendKeys("admin");
-        element.password.sendKeys("Admin123");
-        element.lgnBttn.click();
-        element.registerBttn.click();
-        element.givenName.sendKeys("Buse Test User 6");
-        element.familyName.sendKeys("Ozer");
-        element.nextBttn.click();
-        element.genderChoosing.click();
-        element.nextBttn.click();
-        element.birthDay.sendKeys("27");
+        locators.userName.sendKeys("admin");
+        locators.password.sendKeys("Admin123");
+        locators.lgnBttn.click();
+        locators.registerBttn.click();
+        locators.givenName.sendKeys("Buse Test User 6");
+        locators.familyName.sendKeys("Ozer");
+        locators.nextBttn.click();
+        locators.genderChoosing.click();
+        locators.nextBttn.click();
+        locators.birthDay.sendKeys("27");
 
-        Select months = new Select(element.webMonths);
+        Select months = new Select(locators.webMonths);
         months.selectByVisibleText("May");
-        element.birthYear.sendKeys("1995");
-        element.nextBttn.click();
-        element.adress1.sendKeys("Hurriyet");
-        element.nextBttn.click();
-        element.phoneNumber.sendKeys("5523088166");
-        element.nextBttn.click();
+        locators.birthYear.sendKeys("1995");
+        locators.nextBttn.click();
+        locators.adress1.sendKeys("Hurriyet");
+        locators.nextBttn.click();
+        locators.phoneNumber.sendKeys("5523088166");
+        locators.nextBttn.click();
 
-        Select relate = new Select(element.webRelations);
+        Select relate = new Select(locators.webRelations);
         relate.selectByVisibleText("Doctor");
 
-        element.personName.sendKeys("Test User");
-        element.nextBttn.click();
-        element.submit.click();
+        locators.personName.sendKeys("Test User");
+        locators.nextBttn.click();
+        locators.submit.click();
 
-        String actualName = element.nameOnPage.getText();
+        String actualName = locators.nameOnPage.getText();
         System.out.println(actualName.contains("Buse"));
 
-        String actualID = element.idOnPage.getText();
+        String actualID = locators.idOnPage.getText();
         System.out.println(actualID.contains("100H"));
     }
 
     @Test (priority = 6)
     public void SearchFromPatientList(){
+        US_Elements locators = new US_Elements();
 
-        Elements element = new Elements();
 
-        element.userName.sendKeys("admin");
-        element.password.sendKeys("Admin123");
-        element.location.click();
-        element.lgnBttn.click();
-        element.recordPatient.click();
+
+        locators.userName.sendKeys("admin");
+        locators.password.sendKeys("Admin123");
+        locators.location.click();
+        locators.lgnBttn.click();
+        locators.recordPatient.click();
         System.out.println(driver.getTitle().equals("Find Patient Record"));
-        element.searchPatient.sendKeys("anisa");
-        element.findRecord.click();
+        locators.searchPatient.sendKeys("anisa");
+        locators.findRecord.click();
         driver.navigate().back();
-        element.searchPatient.sendKeys("Buse");
+        locators.searchPatient.sendKeys("Buse");
         Assert.assertEquals(driver.findElement(By.xpath("//td[text()=\"No matching records found\"]")).getText(),
                 "No matching records found",
                 "Metin eşleşmedi!");
