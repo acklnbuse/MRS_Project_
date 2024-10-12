@@ -1,9 +1,9 @@
 package OpenMRS;
 
-import US_404.Elements;
 import Utility.BaseDriver;
 import Utility.Tools;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -167,8 +167,135 @@ public class OpenMRS_Project extends BaseDriver {
     }
 
 
+    @Test(priority = 3)
+    public void SistemdenCikisLogoutYapmak(){
+
+        US_Elements locators = new US_Elements();
+
+        driver.get("https://openmrs.org/");
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.languageClick)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.languageSelection)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.demoClick)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.exploreOpenMRS2Click)).click();
 
 
+        wait.until(ExpectedConditions.elementToBeClickable(locators.enterOpenMRS2Demo));
+        js.executeScript("arguments[0].click()",locators.enterOpenMRS2Demo);
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.userName)).sendKeys("admin");
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.password)).sendKeys("Admin123");
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.locationInpatientWard)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.loginButton)).click();
+
+
+        locators.verifyContainsText(locators.locationText,"Inpatient Ward");
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.logout)).click();
+
+        System.out.println(locators.loginText.getText());
+
+        locators.verifyContainsText(locators.loginText, "LOGIN");
+
+
+
+    }
+
+    @Test(priority = 5)
+    public void MyAccount(){
+        US_Elements locators = new US_Elements();
+        driver.get("https://openmrs.org/");
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.languageClick)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.languageSelection)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.demoClick)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.exploreOpenMRS2Click)).click();
+
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.enterOpenMRS2Demo));
+        js.executeScript("arguments[0].click()",locators.enterOpenMRS2Demo);
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.userName)).sendKeys("admin");
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.password)).sendKeys("Admin123");
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.locationInpatientWard)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.loginButton)).click();
+
+        locators.verifyContainsText(locators.locationText,"Inpatient Ward");
+
+        wait.until(ExpectedConditions.visibilityOf(locators.adminIcon));
+        new Actions(driver).moveToElement(locators.adminIcon).perform();
+        wait.until(ExpectedConditions.elementToBeClickable(locators.myAccountClick)).click();
+
+        locators.verifyContainsText(locators.changePassword,"Change Password");
+        locators.verifyContainsText(locators.myLanguages,"My Languages");
+
+    }
+
+    @Test(priority = 9)
+    public void HastaKayitlariniBirlestirme(){
+
+        US_Elements locators = new US_Elements();
+        driver.get("https://openmrs.org/");
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.languageClick)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.languageSelection)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.demoClick)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.exploreOpenMRS2Click)).click();
+
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.enterOpenMRS2Demo));
+        js.executeScript("arguments[0].click()",locators.enterOpenMRS2Demo);
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.userName)).sendKeys("admin");
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.password)).sendKeys("Admin123");
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.locationInpatientWard)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.loginButton)).click();
+
+        locators.verifyContainsText(locators.locationText,"Inpatient Ward");
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.dataManagement)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.mergePatientElectronicRecords)).click();
+
+        wait.until(ExpectedConditions.visibilityOf(locators.PatientID1)).sendKeys("100J27");
+        wait.until(ExpectedConditions.visibilityOf(locators.PatientID2)).sendKeys("100H"+ Keys.TAB);
+
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.continueBtn)).click();
+
+        wait.until(ExpectedConditions.visibilityOf(locators.selectThePreferredRecord)).click();
+
+        System.out.println(locators.mergingMassage.getText());
+        locators.verifyContainsText(locators.mergingMassage,"Merging cannot be undone!");
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.continueBtn)).click();
+
+        wait.until(ExpectedConditions.visibilityOf(locators.patientID1Text));
+        wait.until(ExpectedConditions.visibilityOf(locators.patientID2Text));
+
+        locators.verifyContainsText(locators.patientID1Text,"100J27");
+        locators.verifyContainsText(locators.patientID2Text,"100H");
+
+
+    }
 
 
 
