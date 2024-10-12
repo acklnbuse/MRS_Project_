@@ -214,11 +214,6 @@ public class US_Elements {
 
       @FindBy(css = "[class='float-sm-right'] :nth-child(3)")
       public WebElement patientID2Text;
-
-
-
-
-
       public void verifyContainsText(WebElement element, String value){
 
 
@@ -228,51 +223,6 @@ public class US_Elements {
 
 
       }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }
 
