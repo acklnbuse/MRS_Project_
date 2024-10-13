@@ -12,7 +12,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.util.Random;
 
 public class OpenMRS_Project extends BaseDriver {
 
@@ -154,6 +153,7 @@ public class OpenMRS_Project extends BaseDriver {
         Tools.Wait(2);
         US_Elements locators = new US_Elements();
 
+
         wait.until(ExpectedConditions.elementToBeClickable(locators.demoClick)).click();
 
         wait.until(ExpectedConditions.elementToBeClickable(locators.exploreOpenMRS2Click)).click();
@@ -165,7 +165,8 @@ public class OpenMRS_Project extends BaseDriver {
 
         wait.until(ExpectedConditions.visibilityOf(locators.adminIcon));
         new Actions(driver).moveToElement(locators.adminIcon).perform();
-        wait.until(ExpectedConditions.elementToBeClickable(locators.myAccountClick));
+
+//        wait.until(ExpectedConditions.elementToBeClickable(locators.myAccountClick));
         js.executeScript("arguments[0].click()", locators.myAccountClick);
 
         wait.until(ExpectedConditions.urlToBe("https://demo.openmrs.org/openmrs/adminui/myaccount/myAccount.page"));
@@ -178,6 +179,13 @@ public class OpenMRS_Project extends BaseDriver {
     public void SearchFromPatientList() {
         US_Elements locators = new US_Elements();
         driver.get("https://openmrs.org/");
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.demoClick)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.exploreOpenMRS2Click)).click();
+
+        wait.until(ExpectedConditions.elementToBeClickable(locators.enterOpenMRS2Demo));
+        js.executeScript("arguments[0].click()", locators.enterOpenMRS2Demo);
 
         wait.until(ExpectedConditions.elementToBeClickable(locators.findPatientRecordButton));
         js.executeScript("arguments[0].click()", locators.findPatientRecordButton);
@@ -259,13 +267,6 @@ public class OpenMRS_Project extends BaseDriver {
     @Test(priority = 9)
     public void HastaKayitlariniBirlestirme() {
 
-        RegisterPatient();
-        WebElement idNoAl1 = driver.findElement(By.xpath("//div[@class='float-sm-right']/span"));
-        String idNo1 = idNoAl1.getText();
-        RegisterPatient();
-        WebElement idNoAl2 = driver.findElement(By.xpath("//div[@class='float-sm-right']/span"));
-        String idNo2 = idNoAl2.getText();
-
         US_Elements locators = new US_Elements();
 
         driver.get("https://openmrs.org/");
@@ -284,8 +285,8 @@ public class OpenMRS_Project extends BaseDriver {
 
         wait.until(ExpectedConditions.elementToBeClickable(locators.mergePatientElectronicRecords)).click();
 
-        wait.until(ExpectedConditions.visibilityOf(locators.PatientID1)).sendKeys(idNo1);
-        wait.until(ExpectedConditions.visibilityOf(locators.PatientID2)).sendKeys(idNo2 + Keys.TAB);
+        wait.until(ExpectedConditions.visibilityOf(locators.PatientID1)).sendKeys("100K18");
+        wait.until(ExpectedConditions.visibilityOf(locators.PatientID2)).sendKeys( "100JDJ"+ Keys.TAB);
 
         wait.until(ExpectedConditions.elementToBeClickable(locators.continueBtn)).click();
 
@@ -300,8 +301,11 @@ public class OpenMRS_Project extends BaseDriver {
         wait.until(ExpectedConditions.visibilityOf(locators.patientID1Text));
         wait.until(ExpectedConditions.visibilityOf(locators.patientID2Text));
 
-        Assert.assertTrue(locators.patientID1Text.getText().contains(idNo1));
-        Assert.assertTrue(locators.patientID2Text.getText().contains(idNo2));
+        wait.until(ExpectedConditions.elementToBeClickable(locators.patientID1Text));
+        wait.until(ExpectedConditions.elementToBeClickable(locators.patientID2Text));
+
+        Assert.assertTrue(locators.patientID1Text.getText().contains("100K18"));
+        Assert.assertTrue(locators.patientID2Text.getText().contains("100JDJ"));
 
     }
 

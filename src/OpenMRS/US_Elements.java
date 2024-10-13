@@ -156,7 +156,7 @@ public class US_Elements {
       @FindBy(css = "[class='w-auto']")
       public WebElement loginText;
 
-      @FindBy(css = "[class='nav-item identifier']")
+      @FindBy(xpath = "//i[@class='icon-user small']")
       public WebElement adminIcon;
 
       @FindBy(xpath = "(//li/a)[1]")
