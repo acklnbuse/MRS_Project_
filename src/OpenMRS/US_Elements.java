@@ -63,11 +63,8 @@ public class US_Elements {
       @FindBy(css = "[id='patient-search']")
       public WebElement searchBox;
 
-      @FindBy(xpath = "//*[text()='Buse Test User 1 Ozer']")
+      @FindBy(css = "[class='odd']> :nth-child(2)")   //*[text()='Buse Test User 6 Ozer'])[1]
       public WebElement enterName;
-
-      @FindBy(xpath = "//*[@id='patient-search-results-table']/tbody")
-      public List<WebElement> locator;
 
       @FindBy(xpath = "(//div[@class='text'])[3]")
       public WebElement errorMessage3;
@@ -77,9 +74,6 @@ public class US_Elements {
 
       @FindBy(css = "[role='alert']>tr")
       public List<WebElement> rowcounts;
-
-      @FindBy(xpath = "//*[@id=\"sessionLocation\"]")
-      public List<WebElement> productListChooseLocation;
 
       @FindBy(id = "username")
       public WebElement userName;
@@ -120,36 +114,26 @@ public class US_Elements {
       @FindBy(id= "relationship_type")
       public WebElement webRelations ;
 
-      @FindBy(xpath= "//*[@id=\\\"relationship\\\"]/p[2]/input[1]")
+      @FindBy(xpath= "//*[@id='relationship']/p[2]/input[1]")
       public WebElement personName;
 
       @FindBy(id= "submit")
       public WebElement submit;
 
-      @FindBy(xpath= "//*[@id=\"content\"]/div[6]/div[1]/div/div[1]/h1/span[1]/span")
+      @FindBy(xpath= "//*[@id='content']/div[6]/div[1]/div/div[1]/h1/span[1]/span")
       public WebElement nameOnPage;
 
-      @FindBy(xpath= "//*[@id=\"content\"]/div[6]/div[2]/div")
+      @FindBy(xpath= "//*[@id='content']/div[6]/div[2]/div")
       public WebElement idOnPage;
 
-      @FindBy(xpath= "//*[@id=\"Pharmacy\"]")
+      @FindBy(xpath= "//*[@id='Pharmacy']")
       public WebElement location;
 
-      @FindBy(xpath= "//*[@id=\"coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension\"]")
+      @FindBy(xpath= "//*[@id='coreapps-activeVisitsHomepageLink-coreapps-activeVisitsHomepageLink-extension']")
       public WebElement recordPatient;
 
-      @FindBy(xpath= "//input[@id=\"patient-search\"]")
+      @FindBy(xpath= "//input[@id='patient-search']")
       public WebElement searchPatient;
-
-      @FindBy(xpath= "//*[@id=\"patient-search-results-table\"]/tbody")
-      public WebElement findRecord;
-
-
-
-      @FindBy(css = "[class='gt_float_switcher-arrow']")
-      public WebElement languageClick;
-      @FindBy(css = "[data-gt-lang='en']")
-      public WebElement languageSelection;
 
       @FindBy(css = "[class='zak-button']")
       public WebElement demoClick;
@@ -159,7 +143,6 @@ public class US_Elements {
 
       @FindBy(linkText = "Enter the OpenMRS 2 Demo")
       public WebElement enterOpenMRS2Demo;
-
 
       @FindBy(id = "Inpatient Ward")
       public WebElement locationInpatientWard;
@@ -184,9 +167,6 @@ public class US_Elements {
 
       @FindBy(xpath = "(//div[@class='task'])[2]")
       public WebElement myLanguages;
-
-      @FindBy(css = "[class='icon-search']")
-      public WebElement findPalientRecord;
 
       @FindBy(css = "[class='icon-hdd']")
       public WebElement dataManagement;
@@ -214,16 +194,11 @@ public class US_Elements {
 
       @FindBy(css = "[class='float-sm-right'] :nth-child(3)")
       public WebElement patientID2Text;
-      public void verifyContainsText(WebElement element, String value){
-
-
-            wait.until(ExpectedConditions.textToBePresentInElement(element,value));
-
-            Assert.assertTrue(element.getText().toLowerCase().contains(value.toLowerCase()));
 
 
       }
 
-}
+
+
 
 
